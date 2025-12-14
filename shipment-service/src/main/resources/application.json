@@ -1,0 +1,26 @@
+{
+  "serviceConfiguration": {
+    "id": "ShipmentApplication",
+    "serviceName": "Shipment Application Command Service",
+    "logLevel": "info",
+    "eventPackages" : ["com.demo.shipment.events"],
+    "verticals": [
+      {
+        "id": "20c69484-b359-4a48-9155-d877198d5db4",
+        "name": "Order Service on Vertical-0",
+        "tenants": [
+          {
+            "id": "20c69484-b359-4a48-9155-d877198d5db4",
+            "name": "Shipment Service on Tenant-0",
+            "serviceBusConnectionString": "amqp://guest:guest@localhost:5672",
+            "cacheServerConnectionString": "redis://password@localhost:6379/0",
+            "eventDatabaseName": "shipment_event_database",
+            "stateDatabaseName": "shipment_state_database",
+            "stateServerConnectionString": "mongodb://localhost:27017/",
+            "eventServerConnectionString": "mongodb://localhost:27017/"
+          }
+        ]
+      }
+    ]
+  }
+}

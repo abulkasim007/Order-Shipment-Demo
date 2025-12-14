@@ -1,0 +1,18 @@
+[versions]
+java = "25"
+querydslapt = "7.1"
+postgresql = "42.7.8"
+libraryVersion = "1.0-SNAPSHOT"
+
+[libraries]
+
+# Libraries
+host = { module = "libs.axiom:host-implementations", version.ref = "libraryVersion" }
+rdbms = { module = "libs.axiom:rdbms-implementations", version.ref = "libraryVersion" }
+mongodb = { module = "libs.axiom:mongodb-implementations", version.ref = "libraryVersion" }
+rabbitmq = { module = "libs.axiom:rabbitmq-implementations", version.ref = "libraryVersion" }
+dataAbstractions = { module = "libs.axiom:data-abstractions", version.ref = "libraryVersion" }
+messagingAbstractions = { module = "libs.axiom:messaging-abstractions", version.ref = "libraryVersion" }
+
+# Postgresql
+postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }

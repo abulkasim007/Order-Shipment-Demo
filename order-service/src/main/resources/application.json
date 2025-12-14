@@ -1,0 +1,26 @@
+{
+  "serviceConfiguration": {
+    "id": "OrderApplication",
+    "serviceName": "Order Application Command Service",
+    "logLevel": "info",
+    "eventPackages" : ["com.demo.order.events"],
+    "verticals": [
+      {
+        "id": "20c69484-b359-4a48-9155-d877198d5db4",
+        "name": "Order Service on Vertical-0",
+        "tenants": [
+          {
+            "id": "20c69484-b359-4a48-9155-d877198d5db4",
+            "name": "Order Service on Tenant-0",
+            "serviceBusConnectionString": "amqp://guest:guest@localhost:5672",
+            "cacheServerConnectionString": "redis://password@localhost:6379/0",
+            "eventDatabaseName": "order_event_database",
+            "stateDatabaseName": "order_state_database",
+            "stateServerConnectionString": "jakarta.persistence.jdbc.driver=org.postgresql.Driver;jakarta.persistence.jdbc.url=jdbc:postgresql://localhost/order_state_database;jakarta.persistence.jdbc.user=postgres;jakarta.persistence.jdbc.password=12345;jakarta.persistence.schema-generation.database.action=none;hibernate.show_sql=true;hibernate.format_sql=true;hibernate.physical_naming_strategy=org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy;hibernate.connection.autocommit=false;hibernate.hikari.minimumIdle=5;hibernate.hikari.maximumPoolSize=10;hibernate.hikari.idleTimeout=30000;hibernate.hikari.maxLifetime=1800000;hibernate.hikari.connectionTimeout=1800000;hibernate.connection.provider_class=org.hibernate.hikaricp.internal.HikariCPConnectionProvider;hibernate.connection.provider_disables_autocommit=true;hibernate.allow_update_outside_transaction=true",
+            "eventServerConnectionString": "jakarta.persistence.jdbc.driver=org.postgresql.Driver;jakarta.persistence.jdbc.url=jdbc:postgresql://localhost/order_event_database;jakarta.persistence.jdbc.user=postgres;jakarta.persistence.jdbc.password=12345;jakarta.persistence.schema-generation.database.action=none;hibernate.show_sql=true;hibernate.format_sql=true;hibernate.physical_naming_strategy=org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy;hibernate.connection.autocommit=false;hibernate.hikari.minimumIdle=5;hibernate.hikari.maximumPoolSize=10;hibernate.hikari.idleTimeout=30000;hibernate.hikari.maxLifetime=1800000;hibernate.hikari.connectionTimeout=1800000;hibernate.connection.provider_class=org.hibernate.hikaricp.internal.HikariCPConnectionProvider;hibernate.connection.provider_disables_autocommit=true;hibernate.allow_update_outside_transaction=true"
+          }
+        ]
+      }
+    ]
+  }
+}

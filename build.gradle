@@ -1,0 +1,214 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.demo'
+version = '1.0-SNAPSHOT'
+
+
+subprojects {
+    apply plugin: 'java'
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(libs.versions.java.get().toInteger())
+        }
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
+
+project(':order-commands') {
+    apply plugin: 'java-library'
+    dependencies {
+        api libs.messagingAbstractions
+    }
+}
+
+project(':order-events') {
+    apply plugin: 'java-library'
+    dependencies {
+        api libs.dataAbstractions
+    }
+}
+
+project(':order-domain') {
+    apply plugin: 'java-library'
+    dependencies {
+        api project(":order-events")
+
+        api libs.dataAbstractions
+
+        annotationProcessor "io.github.openfeign.querydsl:querydsl-apt:${libs.versions.querydslapt.get()}:general"
+    }
+}
+
+project(':order-app') {
+    apply plugin: 'java-library'
+
+    dependencies {
+        api project(":order-domain")
+        api project(":order-commands")
+    }
+}
+
+project(':shipment-commands') {
+    apply plugin: 'java-library'
+    dependencies {
+        api libs.messagingAbstractions
+    }
+}
+
+project(':shipment-events') {
+    apply plugin: 'java-library'
+    dependencies {
+        api libs.messagingAbstractions
+    }
+}
+
+project(':shipment-domain') {
+    apply plugin: 'java-library'
+    dependencies {
+        api project(":shipment-events")
+
+        api libs.dataAbstractions
+
+        annotationProcessor "io.github.openfeign.querydsl:querydsl-apt:${libs.versions.querydslapt.get()}:general"
+    }
+}
+
+project(':shipment-app') {
+    apply plugin: 'java-library'
+
+    dependencies {
+        api project(":shipment-commands")
+        api project(":shipment-domain")
+    }
+}
+
+
+project(':order-service') {
+    apply plugin: 'application'
+
+    dependencies {
+        implementation project(":order-app")
+
+        implementation libs.host
+        implementation libs.rdbms
+        implementation libs.mongodb
+        implementation libs.rabbitmq
+
+        runtimeOnly libs.postgresql
+    }
+
+    jar {
+        manifest {
+            attributes 'Main-Class': 'com.demo.order.service.Main'
+        }
+
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+        from {
+            configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+        }
+
+        dependsOn configurations.runtimeClasspath.getBuildDependencies()
+    }
+}
+
+project(':order-coordinator') {
+    apply plugin: 'application'
+
+    dependencies {
+        implementation project(":order-events")
+        implementation project(":shipment-events")
+        implementation project(":order-commands")
+        implementation project(":shipment-commands")
+
+        implementation libs.host
+        implementation libs.rabbitmq
+    }
+
+    jar {
+        manifest {
+            attributes 'Main-Class': 'com.demo.order.coordinator.Main'
+        }
+
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+        from {
+            configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+        }
+
+        dependsOn configurations.runtimeClasspath.getBuildDependencies()
+    }
+}
+
+
+
+
+
+project(':shipment-service') {
+    apply plugin: 'application'
+
+    dependencies {
+        implementation project(":shipment-app")
+
+        implementation libs.host
+        implementation libs.rdbms
+        implementation libs.mongodb
+        implementation libs.rabbitmq
+
+        runtimeOnly libs.postgresql
+    }
+
+    jar {
+        manifest {
+            attributes 'Main-Class': 'com.demo.shipment.service.Main'
+        }
+
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+        from {
+            configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+        }
+
+        dependsOn configurations.runtimeClasspath.getBuildDependencies()
+    }
+}
+
+project(':order-query') {
+    apply plugin: 'application'
+
+    dependencies {
+        implementation project(":order-events")
+
+        implementation libs.host
+        implementation libs.rdbms
+        implementation libs.mongodb
+        implementation libs.rabbitmq
+
+        runtimeOnly libs.postgresql
+    }
+
+    jar {
+        manifest {
+            attributes 'Main-Class': 'com.demo.order.query.Main'
+        }
+
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+        from {
+            configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+        }
+
+        dependsOn configurations.runtimeClasspath.getBuildDependencies()
+    }
+}

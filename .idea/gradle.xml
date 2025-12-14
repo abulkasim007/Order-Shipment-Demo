@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/order-app" />
+            <option value="$PROJECT_DIR$/order-commands" />
+            <option value="$PROJECT_DIR$/order-coordinator" />
+            <option value="$PROJECT_DIR$/order-domain" />
+            <option value="$PROJECT_DIR$/order-events" />
+            <option value="$PROJECT_DIR$/order-query" />
+            <option value="$PROJECT_DIR$/order-service" />
+            <option value="$PROJECT_DIR$/shipment-app" />
+            <option value="$PROJECT_DIR$/shipment-commands" />
+            <option value="$PROJECT_DIR$/shipment-domain" />
+            <option value="$PROJECT_DIR$/shipment-events" />
+            <option value="$PROJECT_DIR$/shipment-service" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

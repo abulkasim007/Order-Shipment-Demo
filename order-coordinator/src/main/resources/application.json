@@ -1,0 +1,20 @@
+{
+  "serviceConfiguration": {
+    "id": "OrderCoordinator",
+    "serviceName": "Order Coordinator Service",
+    "logLevel": "info",
+    "verticals": [
+      {
+        "id": "20c69484-b359-4a48-9155-d877198d5db4",
+        "name": "Order Coordinator Service on Vertical-0",
+        "tenants": [
+          {
+            "id": "20c69484-b359-4a48-9155-d877198d5db4",
+            "name": "Order Coordinator Service on Tenant-0",
+            "serviceBusConnectionString": "amqp://guest:guest@localhost:5672"
+          }
+        ]
+      }
+    ]
+  }
+}

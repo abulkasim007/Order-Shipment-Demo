@@ -1,0 +1,26 @@
+{
+  "serviceConfiguration": {
+    "id": "OrderQuery",
+    "serviceName": "Order Query Service",
+    "logLevel": "info",
+    "eventPackages" : [],
+    "verticals": [
+      {
+        "id": "20c69484-b359-4a48-9155-d877198d5db4",
+        "name": "Order Query Service on Vertical-0",
+        "tenants": [
+          {
+            "id": "20c69484-b359-4a48-9155-d877198d5db4",
+            "name": "Order Query Service on Tenant-0",
+            "serviceBusConnectionString": "amqp://guest:guest@localhost:5672",
+            "cacheServerConnectionString": "redis://password@localhost:6379/0",
+            "readDatabaseName": "order_query_database",
+            "stateDatabaseName": "order_query_database",
+            "readServerConnectionString": "mongodb://localhost:27017/",
+            "stateServerConnectionString": "mongodb://localhost:27017/"
+          }
+        ]
+      }
+    ]
+  }
+}
